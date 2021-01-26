@@ -2,7 +2,7 @@
 
 This project was a team effort comprised of Aleksey Garbaly, Rachel Rystedt, and Amit Bista. A paper that was written for this project can be provided upon request.
 
-The BERT model on Google Colab already has instructions this ReadME is just outlining what was done in the project and the conclusions.
+The BERT model on Google Colab already has instructions, this ReadME is just outlining what was done in the project and the conclusions.
 
 The project's motivation was to improve an existing sentiment analysis models using a state-of-the-art (SOTA) model such as BERT. BERT and other NLP models are often large
 and costly to train, limiting the amount of people that could use them and improve upon them. In this project various ways to make BERT better to make it more available to others are explored. When optimal parameters are found, they could be combined to get the best possible BERT model. 
