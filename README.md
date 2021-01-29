@@ -1,22 +1,33 @@
 # Making-BERT-Better
 
-This project was a team effort comprised of Aleksey Garbaly, Rachel Rystedt, and Amit Bista. A paper that was written for this project can be provided upon request.
+The BERT model on Google Colab already has instructions, this ReadME is just outlining what parts were changed and used
 
-The BERT model on Google Colab already has instructions, this ReadME is just outlining what was done in the project and the conclusions.
+User Manual for BERT using Google Colab
+	The Google Colab notebook already has text and instruction, but a few important steps will be shown here. The original notebook is shown in [3] so only the parts that are changed or are important will be displayed as steps as once certain things are entered, most of the remaining steps can be automatically run.
 
-The project's motivation was to improve an existing sentiment analysis models using a state-of-the-art (SOTA) model such as BERT. BERT and other NLP models are often large
-and costly to train, limiting the amount of people that could use them and improve upon them. In this project various ways to make BERT better to make it more available to others are explored. When optimal parameters are found, they could be combined to get the best possible BERT model. 
+**Environment Setup**
+BERT was originally trained under TensorFlow 1.11.0, it still works under many versions but 1.15 was chosen as that was the moist recent TensorFlow version in anaconda before TensorFlow 2.0.0. With the newer TF v2 version, many aspects of BERT have to be changed as some methods were removed and changed, look the TensorFlow 2 documentation for more information.
+[] pip install tensorflow==1.15
 
-The dataset the team choose came from a text processing challenge on Kaggle, the URL for the dataset was found on: https://www.kaggle.com/c/twitter-sentiment-analysis2
-The team went through data preparation steps to ensure the data was ready to be input into BERT. irst regular expressions were used to clean any strings that the team felt were not deterministic for sentiment analysis. Removing hashtag may influence sentiment but we wanted to extract sentiment from sentences, not being influenced y the subject the sentence was directed toward We also removed numbers as they were additional data in the tweets that did not help predict a tweets sentiment. We also removed blank tweets as
-they could not be tokenized by the model and caused problems when training.
+The notebook has a cell that allows you to connect to a bucket that is found in Google’s cloud service, this will output all model checkpoints and evaluation directly to the chosen bucket. The OUTPUT_DIR is the name of the folder that will be created to contain all the outputs, and the BUCKET: option lets you pick what bucket you would like to use. The first time the cell is run a short verification is performed to make sure that the right person is trying to access the given bucket.
 
-Setting up local environments became a time-consuming process for the team, as we ran into installation issues with Transformers, a needed package for BERT. To solve for this the team used Google Colab as the cloud server to execute our code on. The model used in the paper was based on a prewritten Google Colab notebook found in the citation.
+![GitHub Logo](C:/Users/user/Pictures/BERT1.png)
+Format: ![Alt Text](url)
 
-BERT, Bidirectional Encoder Representations from Transformers, was introduced by researchers at Google AI Language. It provides state-of-the-art results in various NLP tasks that includes Question Answering (SQuADv1.1), Natural Language Inference (MNLI) etc. This was the model used as it had a lot of documentation. While there are many metrics that can measure how well models perform for any given tasks, the f1 score is a balanced one because it provides a combination precision and recall. Precision is a measure of how exact your predictions are while the recall compares how many predicted true positives there are compared to the actual number of positives, it can be thought as the sensitivity.
+**Data input**
+This cell lets you import and locally upload your data into the Google Colab notebook. Once its been uploaded then it can be accessed locally. You can also just find and drag files in the appropriate places, but this built cell does the work for you. The first time the cell is run a short verification is performed to make sure that the right person is trying to access the appropriate drive.
 
-Implemented Model Improvements:
+**Sequence Length**
+The sequence length can be changed, the default was 128 but it was changed to 64 after preprocessing the twitter data. Generally, the longer the sequence length, the more computationally expensive the model will be to train.
 
-MobileBERT: MobileBERT was used as a way for our team to quickly test out if we could get hyperparameter tuning to improve the model's accuracy. MobileBERT is a lite version of BERT Base that has bottleneck layers to help remove noise and increase processing power. The model was trained varying epochs from 1 to 5, using epoch 1 as a base, learning rates and batch sizes were also changed. Unfortunately, The F1 score did not change any significant amount for any changes made to the model.
+**Creating the Model**
+The FC architecture of the model can be changed in this cell, but the guidelines to do so can be found in BERT’s original source files.
 
-1 Epoch is Enough: This method for BERT improvement came from a paper that looked at trying to reduce training time and improve the overall model. They found that by training on a larger dataset and training on less epochs, they sped up the training and reduced overfitting without needing to perform regularization as it slowed down the training. Generally, they state the following “Training for E epochs is roughly equivalent to training on a shuffled dataset consisting of E copies of the original dataset for one epoch”. When the epoch was reduced from three epochs to one epoch, the training data was also increased from threefold. There was a slight increase in training size and a small increase in the F1 score. These results differ from the results in the paper that was referenced in the methods, this might have been due to not changing the iteration parameter and small dataset used.
+The major hyper-parameters can be changed in this cell. There is a limit on the batch size as you get a limited amount of memory allotted in Google Colab so if this number is set too high the model will terminate training and notify you. The learning rate and epoch number shown were used as the reference numbers. Warm-up describes how fast the learning rate will start up, it makes the learning rate small at first and the increases it over a few iterations or epochs until it reaches the actual learning rate.
+
+**Model Evaluation**
+After the model has been trained and evaluated, a metrics csv file is generated containing a list of the hyper parameters and many of the metrics found in the model. There are two places that the file can be put, your local cloud drive or on your bucket on the folder that was specified at the beginning. The cell below gives the user the ability to save the file their chosen drive directory with using their chosen file name.
+ 
+The cells used to save the file on the bucket is shown below. The gsutil command lets you access your cloud storage and copies the csv file from your drive to your bucket. Your particular Project ID should be entered in the “project_id” line, ad your bucket name has to be entered in the bucket_name line.
+ 
+
