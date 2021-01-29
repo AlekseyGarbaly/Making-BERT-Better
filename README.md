@@ -11,7 +11,7 @@ BERT was originally trained under TensorFlow 1.11.0, it still works under many v
 
 The notebook has a cell that allows you to connect to a bucket that is found in Google’s cloud service, this will output all model checkpoints and evaluation directly to the chosen bucket. The OUTPUT_DIR is the name of the folder that will be created to contain all the outputs, and the BUCKET: option lets you pick what bucket you would like to use. The first time the cell is run a short verification is performed to make sure that the right person is trying to access the given bucket.
 
-![GitHub Logo](https://github.com/AlekseyGarbaly/images/tree/main/making_bert-better/BERT1.png)
+![BERT Image](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Stray_kitten_Rambo002.jpg/1200px-Stray_kitten_Rambo002.jpg)
 Format: ![Alt Text](url)
 
 **Data input**
