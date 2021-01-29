@@ -11,7 +11,7 @@ BERT was originally trained under TensorFlow 1.11.0, it still works under many v
 
 The notebook has a cell that allows you to connect to a bucket that is found in Google’s cloud service, this will output all model checkpoints and evaluation directly to the chosen bucket. The OUTPUT_DIR is the name of the folder that will be created to contain all the outputs, and the BUCKET: option lets you pick what bucket you would like to use. The first time the cell is run a short verification is performed to make sure that the right person is trying to access the given bucket.
 
-![Image](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Stray_kitten_Rambo002.jpg/1200px-Stray_kitten_Rambo002.jpg)
+![Image](https://github.com/AlekseyGarbaly/images/blob/main/making_bert-better/BERT1.png)
 
 **Data input**
 This cell lets you import and locally upload your data into the Google Colab notebook. Once its been uploaded then it can be accessed locally. You can also just find and drag files in the appropriate places, but this built cell does the work for you. The first time the cell is run a short verification is performed to make sure that the right person is trying to access the appropriate drive.
