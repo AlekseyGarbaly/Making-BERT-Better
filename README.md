@@ -3,7 +3,7 @@
 The BERT model on Google Colab already has instructions, this ReadME is just outlining what parts were changed and used
 
 User Manual for BERT using Google Colab
-	The Google Colab notebook already has text and instruction, but a few important steps will be shown here. The original notebook is shown in [3] so only the parts that are changed or are important will be displayed as steps as once certain things are entered, most of the remaining steps can be automatically run.
+The Google Colab notebook already has text and instruction, but a few important steps will be shown here. The original notebook is shown in [https://colab.research.google.com/drive/1pfuFzsyQwUeW9VEQt2y5UXW3Qs8_vCpX] so only the parts that are changed or are important will be displayed as steps as once certain things are entered, most of the remaining steps can be automatically run.
 
 **Environment Setup**
 BERT was originally trained under TensorFlow 1.11.0, it still works under many versions but 1.15 was chosen as that was the moist recent TensorFlow version in anaconda before TensorFlow 2.0.0. With the newer TF v2 version, many aspects of BERT have to be changed as some methods were removed and changed, look the TensorFlow 2 documentation for more information.
